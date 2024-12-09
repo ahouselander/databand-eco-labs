@@ -1,0 +1,9 @@
+CHCCLP session set to cdc;
+connect server
+  hostname localhost port 10101
+  username admin_c password passw0rd;
+connect datastore name db2server ;
+select subscription name DB2TOPOSTG sourceDatastore db2server ;
+monitor subscription activity name DB2TOPOSTG ;
+disconnect server;
+exit;
