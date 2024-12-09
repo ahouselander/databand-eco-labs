@@ -22,6 +22,7 @@ Note: The monitoring of CDC via CHCCLP will not effect the performance of the ex
 I have attached three files.
  
 POSTGRES_subsc_capture_stats.chcclp
+
 This is an example CHCCLP input batch file used as input to CHCCLP to collect metrics from the capture component. POSTGRES in the file name represents the name of the subscription to be tracked.
 This file will need to be copied to a file of a similar name, but replacing POSTGRES with the name of your subscription, and editing the contents to specify the correct parameters.
 IBM Databand does not see any of the parameter information you are entering here. 
@@ -31,10 +32,12 @@ Note: Due to my restricted test environment, my actual subscription is DB2TOPOST
  
  
 POSTGRES_subsc_apply_stats.chcclp
+
 This file is very similar to the capture equivalent, except that it points to the apply agent.
 It also will need copying, renaming and editing to match your environment as per the Capture.
  
 A Python script which accepts the subscription name as a parameter.
+
 This python script makes sure that the <subscription>_subsc_capture_stats.chcclp and <subscription>_subsc_apply_stats.chcclp files exist.
 It then uses these two files to call as input to CHCCLP (once for capture, once for apply) redirecting the output to a  file. This file is then filtered to remove unwanted detail and then read to retrieve Insert/Update/Delete information. This info is then pushed into Databand as metrics.
 The python script requires updating to reflect directory structures.
